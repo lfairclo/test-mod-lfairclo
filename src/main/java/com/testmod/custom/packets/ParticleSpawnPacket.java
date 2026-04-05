@@ -38,13 +38,22 @@ public class ParticleSpawnPacket {
     }
 
     public void handle(MinecraftClient client) {
+//        client.execute(() -> {
+//            World level = client.world;
+//            if (level != null) {
+//                Color startColor = new Color(startingColor);
+//                Color endColor = new Color(endingColor);
+//                spawnExampleParticles(level, position, startColor, endColor);
+//            }
+//        });
         client.execute(() -> {
-            World level = client.world;
-            if (level != null) {
-                Color startColor = new Color(startingColor);
-                Color endColor = new Color(endingColor);
-                spawnExampleParticles(level, position, startColor, endColor);
-            }
+            // Only spawn particles if the world and player exist
+            if (client.world == null || client.player == null) return;
+
+            Color startColor = new Color(startingColor);
+            Color endColor = new Color(endingColor);
+
+            spawnExampleParticles(client.world, position, startColor, endColor);
         });
     }
 
