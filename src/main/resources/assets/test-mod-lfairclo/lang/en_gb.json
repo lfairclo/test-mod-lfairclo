@@ -1,3 +1,5 @@
 {
-  "item.test-mod-lfairclo.goon_axe": "Goon Axe"
+  "item.test-mod-lfairclo.goon_axe": "Goon Axe",
+  "itemgroup.testmodlfairclo": "Test Mod Lfairclo Tab :)",
+  "block.test-mod-lfairclo.test_block": "Test Block"
 }

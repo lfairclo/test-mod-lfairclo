@@ -38,8 +38,8 @@ public class LodestoneDI {
                 Vec3d orginalPos = Vec3d.ofCenter(blockPos);
 
 
-                Color startingColor = new Color(100, 0, 100);
-                Color endingColor = new Color(0, 100, 200);
+                Color startingColor = new Color(255, 200, 25);
+                Color endingColor = new Color(54, 54, 54);
                 ParticleSpawnPacket packet = new ParticleSpawnPacket(orginalPos, startingColor.getRGB(), endingColor.getRGB());
                 PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
                 packet.toBytes(buf);

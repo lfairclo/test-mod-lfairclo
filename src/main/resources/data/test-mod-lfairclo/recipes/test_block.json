@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " MM",
+    " MM",
+    " MM"
+  ],
+  "key": {
+    "M": {
+      "item": "test-mod-lfairclo:goon_axe"
+    }
+  },
+  "result": {
+    "count": 3,
+    "item": "test-mod-lfairclo:test_block"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model":"test-mod-lfairclo:block/test_block"
+    }
+  }
+}
