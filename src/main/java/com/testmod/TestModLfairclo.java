@@ -5,8 +5,10 @@ import com.testmod.custom.packets.ModClientPackets;
 import com.testmod.custom.packets.ModPackets;
 import com.testmod.item.ModItemGroups;
 import com.testmod.item.ModItems;
+import com.testmod.util.TaskScheduler;
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,5 +24,11 @@ public class TestModLfairclo implements ModInitializer {
 		ModBlocks.registerModBlocks();
 		ModPackets.registerPackets();
 		ModClientPackets.registerClientPackets();
+
+		ServerTickEvents.END_SERVER_TICK.register(server -> {
+			TaskScheduler.tick();
+			//to use do something like this TaskScheduler.schedule(() -> doSecondThing(), 10);
+		});
+
 	}
 }

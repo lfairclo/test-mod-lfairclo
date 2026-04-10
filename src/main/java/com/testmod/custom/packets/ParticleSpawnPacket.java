@@ -1,5 +1,6 @@
 package com.testmod.custom.packets;
 
+import com.testmod.particles.ExplosionParticle;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.util.math.Vec3d;
@@ -51,7 +52,7 @@ public class ParticleSpawnPacket {
             Color startColor = new Color(startingColor);
             Color endColor = new Color(endingColor);
 
-            ExplosionParticle.spawnExampleParticles(client.world, position, startColor, endColor);
+            ExplosionParticle.spawnExplosion(client.world, position, startColor, endColor);
             ScreenshakeHandler.addScreenshake(new ScreenshakeInstance(100).setIntensity(100f));
         });
     }
