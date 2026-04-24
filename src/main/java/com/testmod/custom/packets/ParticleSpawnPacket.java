@@ -1,6 +1,6 @@
 package com.testmod.custom.packets;
 
-import com.testmod.particles.ExplosionParticle;
+import com.testmod.particles.ExplosionEffect;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.util.math.Vec3d;
@@ -49,11 +49,10 @@ public class ParticleSpawnPacket {
             // Only spawn particles if the world and player exist
             if (client.world == null || client.player == null) return;
 
-            Color startColor = new Color(startingColor);
-            Color endColor = new Color(endingColor);
 
-            ExplosionParticle.spawnExplosion(client.world, position, startColor, endColor);
-            ScreenshakeHandler.addScreenshake(new ScreenshakeInstance(100).setIntensity(100f));
+            ExplosionEffect.CreateNewExplosion(client.world, position, client.player);
+
+
         });
     }
 

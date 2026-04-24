@@ -1,0 +1,17 @@
+{
+  "targets": ["minecraft:main"],
+  "passes": [
+    {
+      "name": "shockwave",
+      "intarget": "minecraft:main",
+      "outtarget": "minecraft:main",
+      "auxtargets": [],
+      "uniforms": [
+        { "name": "Origin", "type": "float", "count": 3 },
+        { "name": "Radius", "type": "float", "count": 1 },
+        { "name": "Thickness", "type": "float", "count": 1 },
+        { "name": "Time", "type": "float", "count": 1 }
+      ]
+    }
+  ]
+}

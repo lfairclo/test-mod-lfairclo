@@ -2,6 +2,7 @@ package com.testmod.item;
 
 import com.testmod.TestModLfairclo;
 import com.testmod.block.ModBlocks;
+import com.testmod.registry.ModGuns;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -17,6 +18,7 @@ public class ModItemGroups {
             .icon(() -> new ItemStack(ModItems.GOON_AXE)).entries((displayContext, entries) -> {
                 entries.add(ModBlocks.TESTBLOCK);
                 entries.add(ModItems.GOON_AXE);
+                entries.add(ModGuns.PISTOL);
             }).build());
     public static void registerItemGroups(){
         TestModLfairclo.LOGGER.info("Item Groups Registered");

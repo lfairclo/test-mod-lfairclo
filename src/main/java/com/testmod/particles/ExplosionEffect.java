@@ -1,87 +1,45 @@
 package com.testmod.particles;
 
+
+import com.testmod.client.ShockwaveClientState;
+import com.testmod.client.ShockwaveRenderer;
+import com.testmod.shaders.ModShaders;
+import com.testmod.util.TaskScheduler;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.util.math.random.Random;
 
+import net.minecraft.client.network.ClientPlayerEntity;
+
 import java.awt.*;
 
+import team.lodestar.lodestone.handlers.ScreenshakeHandler;
 import team.lodestar.lodestone.registry.common.particle.LodestoneParticleRegistry;
 import team.lodestar.lodestone.systems.easing.Easing;
 import team.lodestar.lodestone.systems.particle.builder.WorldParticleBuilder;
 import team.lodestar.lodestone.systems.particle.data.GenericParticleData;
 import team.lodestar.lodestone.systems.particle.data.color.ColorParticleData;
+import team.lodestar.lodestone.systems.screenshake.ScreenshakeInstance;
+
+import static com.testmod.particles.FancyExplosion.spawnFlash;
 
 public class ExplosionEffect {
 
-    private final Random random = Random.create();
+    public static void CreateNewExplosion(ClientWorld world, Vec3d pos2, ClientPlayerEntity player){
 
-    private void explosionPhase(World world, Vec3d pos) {
-        for (int i = 0; i < 4; i++) {
+        Vec3d pos = new Vec3d(pos2.x,  pos2.y+10, pos2.z);
 
-            WorldParticleBuilder.create(LodestoneParticleRegistry.SMOKE_PARTICLE)
-                    .setScaleData(GenericParticleData.create(0.5f, 6f)
-                            .setEasing(Easing.SINE_OUT)
-                            .build())
-                    .setTransparencyData(GenericParticleData.create(1f, 0f).build())
-                    .setColorData(ColorParticleData.create(
-                            new Color(255, 200, 80),
-                            new Color(120, 120, 120)
-                    ).build())
-                    .setLifetime(20)
-                    .addMotion(
-                            (random.nextFloat() - 0.5) * 0.4,
-                            random.nextFloat() * 0.4,
-                            (random.nextFloat() - 0.5) * 0.4
-                    )
-                    .spawn(world, pos.x, pos.y, pos.z);
-        }
-    }
 
-    private void implosionPhase(World world, Vec3d pos) {
-        for (int i = 0; i < 3; i++) {
+//        ShockwaveClientState.INSTANCE.start(pos);
+//        ModShaders.SHOCKWAVE.setUniformValue("Thickness", 10.0f);
 
-            double dx = (random.nextFloat() - 0.5) * 2;
-            double dy = (random.nextFloat() - 0.5) * 2;
-            double dz = (random.nextFloat() - 0.5) * 2;
-
-            WorldParticleBuilder.create(LodestoneParticleRegistry.SMOKE_PARTICLE)
-                    .setScaleData(GenericParticleData.create(4f, 1f)
-                            .setEasing(Easing.SINE_IN)
-                            .build())
-                    .setTransparencyData(GenericParticleData.create(1f, 0f).build())
-                    .setColorData(ColorParticleData.create(
-                            new Color(90, 90, 90),
-                            new Color(40, 40, 40)
-                    ).build())
-                    .setLifetime(20)
-                    .addMotion(-dx * 0.15, -dy * 0.15, -dz * 0.15)
-                    .spawn(world,
-                            pos.x + dx,
-                            pos.y + dy,
-                            pos.z + dz);
-        }
-    }
-
-    private void finalBurstPhase(World world, Vec3d pos) {
-        for (int i = 0; i < 6; i++) {
-
-            WorldParticleBuilder.create(LodestoneParticleRegistry.SMOKE_PARTICLE)
-                    .setScaleData(GenericParticleData.create(1f, 10f)
-                            .setEasing(Easing.SINE_OUT)
-                            .build())
-                    .setTransparencyData(GenericParticleData.create(1f, 0f).build())
-                    .setColorData(ColorParticleData.create(
-                            new Color(200, 200, 200),
-                            new Color(60, 60, 60)
-                    ).build())
-                    .setLifetime(15)
-                    .addMotion(
-                            (random.nextFloat() - 0.5) * 0.6,
-                            random.nextFloat() * 0.6,
-                            (random.nextFloat() - 0.5) * 0.6
-                    )
-                    .spawn(world, pos.x, pos.y, pos.z);
-        }
+        FancyExplosion.tuffExplosion(world,pos, 50);
+        spawnFlash();
+        ScreenshakeHandler.addScreenshake(new ScreenshakeInstance(600).setIntensity(100f));
+//        ExplosionParticle.spawnExplosion(world,pos, new Color(255, 200, 80), new Color(120, 120, 120));
+//        ExplosionParticle.spawnExplosionBackround(world,pos, new Color(255, 200, 80), new Color(120, 120, 120));
+//        TaskScheduler.schedule(() -> ExplosionParticle.spawnImplosion(world, pos, new Color(90, 90, 90), new Color(40, 40, 40)), 60);
+//        //TaskScheduler.schedule(() -> ExplosionParticle.spawnBurst(world, pos, new Color(90, 90, 90), new Color(40, 40, 40)), 120);
     }
 }
